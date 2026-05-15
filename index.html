@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pokemon Website Showcase</title>
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Bungee:wght@400&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+		:root {
+			--bg-1: #f7f2e8;
+			--bg-2: #fce8cc;
+			--ink: #1c2430;
+			--ink-soft: #5a6372;
+			--card: rgba(255, 255, 255, 0.88);
+			--line: rgba(28, 36, 48, 0.14);
+			--accent: #e13f2b;
+			--accent-2: #1f7a8c;
+			--ok: #0f766e;
+			--warn: #b45309;
+			--danger: #b91c1c;
+			--shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			color: var(--ink);
+			background:
+				radial-gradient(circle at 8% 8%, #ffe38a 0%, transparent 24%),
+				radial-gradient(circle at 96% 16%, #8fd7ff 0%, transparent 30%),
+				linear-gradient(140deg, var(--bg-1), var(--bg-2));
+			font-family: "Space Grotesk", "Segoe UI", sans-serif;
+			line-height: 1.4;
+			display: grid;
+			place-items: start center;
+			padding: 2rem 1rem 3rem;
+		}
+
+		.shell {
+			width: min(980px, 100%);
+			animation: rise 650ms ease-out;
+		}
+
+		.hero {
+			border: 2px solid var(--line);
+			border-radius: 24px;
+			padding: 1.25rem;
+			background: linear-gradient(120deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.72));
+			box-shadow: var(--shadow);
+		}
+
+		h1 {
+			margin: 0;
+			font-family: "Bungee", "Trebuchet MS", sans-serif;
+			font-weight: 400;
+			letter-spacing: 0.5px;
+			font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+			line-height: 1.2;
+		}
+
+		.hero p {
+			margin: 0.8rem 0 0;
+			color: var(--ink-soft);
+			max-width: 66ch;
+			font-size: 1.02rem;
+		}
+
+		.tag {
+			display: inline-block;
+			margin-bottom: 0.8rem;
+			background: #fff;
+			border: 2px solid var(--ink);
+			border-radius: 999px;
+			padding: 0.2rem 0.7rem;
+			font-size: 0.86rem;
+			font-weight: 700;
+			color: var(--accent);
+		}
+
+		.content {
+			margin-top: 1.2rem;
+			display: grid;
+			gap: 1.2rem;
+			grid-template-columns: 1fr;
+		}
+
+		.panel {
+			border: 2px solid var(--line);
+			border-radius: 20px;
+			padding: 1rem;
+			background: var(--card);
+			box-shadow: var(--shadow);
+		}
+
+		.panel h2 {
+			margin: 0 0 0.8rem;
+			font-size: 1.15rem;
+		}
+
+		.status {
+			margin: 0;
+			font-size: 0.96rem;
+			color: var(--ink-soft);
+		}
+
+		.status.loading {
+			color: var(--accent-2);
+		}
+
+		.status.error {
+			color: var(--danger);
+			font-weight: 700;
+		}
+
+		.status.empty {
+			color: var(--warn);
+			font-weight: 700;
+		}
+
+		.status.ok {
+			color: var(--ok);
+			font-weight: 700;
+		}
+
+		.list {
+			margin: 0.8rem 0 0;
+			padding: 0;
+			list-style: none;
+			display: grid;
+			gap: 0.75rem;
+		}
+
+		.item {
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			background: #fff;
+			padding: 0.8rem 0.9rem;
+			display: flex;
+			justify-content: space-between;
+			gap: 0.75rem;
+			align-items: center;
+			transform: translateY(8px);
+			opacity: 0;
+			animation: pop 480ms ease forwards;
+		}
+
+		.item .name {
+			font-weight: 700;
+			word-break: break-word;
+		}
+
+		.item .meta {
+			color: var(--ink-soft);
+			font-size: 0.88rem;
+			margin-top: 0.2rem;
+			word-break: break-all;
+		}
+
+		.item a {
+			background: linear-gradient(120deg, var(--accent), #f97316);
+			color: #fff;
+			text-decoration: none;
+			border-radius: 10px;
+			padding: 0.45rem 0.7rem;
+			font-weight: 700;
+			white-space: nowrap;
+			border: 1px solid rgba(0, 0, 0, 0.08);
+		}
+
+		.item a:hover,
+		.item a:focus-visible {
+			filter: brightness(0.95);
+			outline: none;
+		}
+
+		.note {
+			font-size: 0.95rem;
+			color: var(--ink-soft);
+			margin: 0;
+		}
+
+		pre {
+			margin: 0.7rem 0 0;
+			padding: 0.7rem;
+			border-radius: 12px;
+			background: #101722;
+			color: #e8eef8;
+			overflow-x: auto;
+			font-family: Consolas, "Courier New", monospace;
+			font-size: 0.86rem;
+		}
+
+		@keyframes rise {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes pop {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (min-width: 860px) {
+			.content {
+				grid-template-columns: 2fr 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="shell">
+		<section class="hero">
+			<span class="tag">Git &amp; GitHub Practice</span>
+			<h1>Pokemon Website Student Showcase</h1>
+			<p>
+				This page reads from <strong>websites.json</strong> and lists student Pokemon projects.
+				To add your website, submit a pull request that appends your entry with a <code>name</code> and <code>url</code>.
+			</p>
+		</section>
+
+		<section class="content">
+			<section class="panel" aria-labelledby="list-title">
+				<h2 id="list-title">Submitted Websites</h2>
+				<p id="status" class="status loading">Loading website list...</p>
+				<ul id="website-list" class="list" aria-live="polite"></ul>
+			</section>
+
+			<aside class="panel" aria-labelledby="how-to-title">
+				<h2 id="how-to-title">How To Add Yours</h2>
+				<p class="note">Edit <strong>websites.json</strong> and add your object to the array:</p>
+				<pre>[
+	{
+		"name": "Your Name",
+		"url": "https://your-pokemon-site.example"
+	}
+]</pre>
+			</aside>
+		</section>
+	</main>
+
+	<script>
+		const statusEl = document.getElementById("status");
+		const listEl = document.getElementById("website-list");
+
+		function setStatus(message, type) {
+			statusEl.textContent = message;
+			statusEl.className = "status" + (type ? " " + type : "");
+		}
+
+		function isValidEntry(entry) {
+			if (!entry || typeof entry !== "object") {
+				return false;
+			}
+
+			if (typeof entry.name !== "string" || typeof entry.url !== "string") {
+				return false;
+			}
+
+			const trimmedName = entry.name.trim();
+			const trimmedUrl = entry.url.trim();
+
+			if (!trimmedName || !trimmedUrl) {
+				return false;
+			}
+
+			try {
+				const parsedUrl = new URL(trimmedUrl);
+				return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
+			} catch {
+				return false;
+			}
+		}
+
+		function renderList(entries) {
+			listEl.innerHTML = "";
+
+			entries.forEach((entry, index) => {
+				const listItem = document.createElement("li");
+				listItem.className = "item";
+				listItem.style.animationDelay = (index * 70) + "ms";
+
+				const textWrap = document.createElement("div");
+
+				const nameEl = document.createElement("div");
+				nameEl.className = "name";
+				nameEl.textContent = entry.name.trim();
+
+				const metaEl = document.createElement("div");
+				metaEl.className = "meta";
+
+				const parsedUrl = new URL(entry.url.trim());
+				metaEl.textContent = parsedUrl.hostname;
+
+				const linkEl = document.createElement("a");
+				linkEl.href = parsedUrl.href;
+				linkEl.target = "_blank";
+				linkEl.rel = "noopener noreferrer";
+				linkEl.textContent = "Visit";
+				linkEl.setAttribute("aria-label", "Visit " + entry.name.trim());
+
+				textWrap.appendChild(nameEl);
+				textWrap.appendChild(metaEl);
+
+				listItem.appendChild(textWrap);
+				listItem.appendChild(linkEl);
+				listEl.appendChild(listItem);
+			});
+		}
+
+		async function loadWebsites() {
+			try {
+				const response = await fetch("./websites.json", { cache: "no-store" });
+
+				if (!response.ok) {
+					throw new Error("Could not read websites.json (HTTP " + response.status + ")");
+				}
+
+				const data = await response.json();
+
+				if (!Array.isArray(data)) {
+					throw new Error("websites.json must contain a JSON array.");
+				}
+
+				const validEntries = data.filter(isValidEntry);
+				const invalidCount = data.length - validEntries.length;
+
+				if (validEntries.length === 0) {
+					setStatus(
+						invalidCount > 0
+							? "No valid entries found. Check that each item includes a valid name and http/https url."
+							: "No websites yet. Be the first to submit a pull request.",
+						"empty"
+					);
+					return;
+				}
+
+				renderList(validEntries);
+
+				if (invalidCount > 0) {
+					setStatus(
+						"Showing " + validEntries.length + " valid websites. Skipped " + invalidCount + " invalid entr" + (invalidCount === 1 ? "y." : "ies."),
+						"ok"
+					);
+				} else {
+					setStatus("Loaded " + validEntries.length + " website" + (validEntries.length === 1 ? "." : "s."), "ok");
+				}
+			} catch (error) {
+				console.error(error);
+				setStatus("Failed to load websites.json. Run this page from a local server and verify JSON format.", "error");
+			}
+		}
+
+		loadWebsites();
+	</script>
+</body>
+</html>
