@@ -184,6 +184,17 @@
 			margin: 0;
 		}
 
+		.steps {
+			margin: 0.55rem 0 0.9rem 1.2rem;
+			padding: 0;
+			display: grid;
+			gap: 0.4rem;
+		}
+
+		.steps li {
+			line-height: 1.35;
+		}
+
 		pre {
 			margin: 0.7rem 0 0;
 			padding: 0.7rem;
@@ -240,6 +251,15 @@
 
 			<aside class="panel" aria-labelledby="how-to-title">
 				<h2 id="how-to-title">How To Add Yours</h2>
+				<p class="note"><strong>GitHub workflow for students:</strong></p>
+				<ol class="steps">
+					<li>Fork the starter repo: <a href="https://github.com/kidino/pokemon-website" target="_blank" rel="noopener noreferrer">github.com/kidino/pokemon-website</a>.</li>
+					<li>Clone <strong>your fork</strong> to your computer.</li>
+					<li>Switch to <strong>main</strong>, pull latest changes, then create a new branch from <strong>main</strong> for your change.</li>
+					<li>Edit <strong>websites.json</strong>, then <code>git add</code>, <code>git commit</code>, and <code>git push</code>.</li>
+					<li>Open your fork on GitHub and click <strong>Compare &amp; pull request</strong>.</li>
+					<li>Set destination/base to <strong>kidino/pokemon-website:main</strong>, then submit your pull request.</li>
+				</ol>
 				<p class="note">Edit <strong>websites.json</strong> and add your object to the array:</p>
 				<pre>[
 	{
@@ -247,6 +267,17 @@
 		"url": "https://your-pokemon-site.example"
 	}
 ]</pre>
+				<p class="note">Example commands:</p>
+				<pre>git clone https://github.com/&lt;your-username&gt;/pokemon-website.git
+cd pokemon-website
+git checkout main
+git pull origin main
+git checkout -b add-my-site
+
+# edit websites.json
+git add websites.json
+git commit -m "Add my Pokemon website"
+git push -u origin add-my-site</pre>
 			</aside>
 		</section>
 	</main>
